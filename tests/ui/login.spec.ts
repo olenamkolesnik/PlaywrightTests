@@ -1,11 +1,15 @@
 import { test, expect } from '../fixtures/login-fixtures';
+import { testCredentials } from '../helpers/test-credentials';
 
 test('Login page loads correctly', async ({ loginPage }) => {
   await loginPage.expectLoginPageFullyLoaded();
 });
 
 test('Login with valid credentials', async ({ loginPage }) => {
-  const inventoryPage = await loginPage.logIn('standard_user', 'secret_sauce');
+  const inventoryPage = await loginPage.logIn(
+    testCredentials.validUser.username!,
+    testCredentials.validUser.password!
+  );
   await inventoryPage.expectInventoryPageFullyLoaded();
 });
 
