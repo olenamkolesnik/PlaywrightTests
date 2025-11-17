@@ -3,6 +3,7 @@ import { BasePage } from './base-page';
 import { FooterComponent } from './footer-component';
 import type { ProductData } from '../types/product';
 import { EXPECTED_PRODUCTS } from '../data/products';
+import { CartPage } from './cart-page';
 
 /**
  * Inventory Page Object Model
@@ -142,6 +143,23 @@ export class InventoryPage extends BasePage {
     await expect(btn).toBeVisible({ timeout: 5000 });
     await btn.click();
   } 
+
+  /**
+   * Return the cart badge Locator for assertions
+   */
+  getCartBadge() {
+    return this.cartBadge;
+  }
+
+  /**
+   * Click the cart icon / link in the header
+   */
+  async clickCart(): Promise<CartPage> {
+    await expect(this.cartButton).toBeVisible({ timeout: 3000 });
+    await this.cartButton.click();
+    await this.page.waitForLoadState('load');
+    return new CartPage(this.page);
+  }
 
   /**
    * Return the numeric cart badge count or null if not visible

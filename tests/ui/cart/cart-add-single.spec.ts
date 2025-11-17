@@ -1,8 +1,8 @@
 // spec: specs/inventory-page-test-plan-updated.md
 // seed: tests/seed.spec.ts
 
-import { test, expect } from '../fixtures/inventory-fixtures';
-import { EXPECTED_PRODUCTS } from '../data/products';
+import { test, expect } from '../../fixtures/inventory-fixtures';
+import { EXPECTED_PRODUCTS } from '../../data/products';
 
 test.describe('Add to Cart Functionality', () => {
   test('@p0 Add Single Product to Cart', async ({ inventoryPage }) => {

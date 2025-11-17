@@ -1,10 +1,10 @@
 // spec: specs/inventory-page-test-plan-updated.md
 // seed: tests/seed.spec.ts
 
-import { test, expect } from '../fixtures/inventory-fixtures';
+import { test, expect } from '../../fixtures/inventory-fixtures';
 
 test.describe('Add to Cart Functionality', () => {
-  test('@p0 Add Multiple Products to Cart', async ({ inventoryPage }) => {
+  test('@p1 Add Multiple Products to Cart', async ({ inventoryPage }) => {
     const productsToAdd = [
       'Sauce Labs Onesie',
       'Sauce Labs Bike Light',
