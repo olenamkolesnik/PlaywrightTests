@@ -42,8 +42,9 @@ export default defineConfig({
   projects: [
      {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] }
-    },
+      use: { ...devices['Desktop Chrome'] },
+      grep: /@p0/,
+    },/*
     {
       name: 'chromium-p0',
       use: { ...devices['Desktop Chrome'] },
@@ -58,8 +59,8 @@ export default defineConfig({
       name: 'chromium-p2',
       use: { ...devices['Desktop Chrome'] },
       grep: /@p2/,
-    },
-/*
+    },*/
+
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
@@ -68,7 +69,7 @@ export default defineConfig({
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
-    },*/
+    },
 
     /* Test against mobile viewports. */
     // {
