@@ -8,7 +8,11 @@
     "test:ui": "playwright test --ui",
     "test:debug": "playwright test --debug",
     "test:headed": "playwright test --headed",
-    "test:report": "playwright show-report"
+    "test:report": "playwright show-report",
+    "test:smoke": "playwright test --grep \"@p0\"",
+    "test:high": "playwright test --grep \"@p1\"",
+    "test:medium": "playwright test --grep \"@p2\"",
+    "test:regression": "playwright test"
   },
   "keywords": [],
   "author": "",

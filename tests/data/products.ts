@@ -1,0 +1,12 @@
+import type { ProductData } from '../types/product';
+
+export const EXPECTED_PRODUCTS: ProductData[] = [
+  { id: 4, name: 'Sauce Labs Backpack', price: '$29.99' },
+  { id: 0, name: 'Sauce Labs Bike Light', price: '$9.99' },
+  { id: 3, name: 'Sauce Labs Bolt T-Shirt', price: '$15.99' },
+  { id: 5, name: 'Sauce Labs Fleece Jacket', price: '$49.99' },
+  { id: 2, name: 'Sauce Labs Onesie', price: '$7.99' },
+  { id: 1, name: 'Test.allTheThings() T-Shirt (Red)', price: '$15.99' },
+];
+
+export default EXPECTED_PRODUCTS;

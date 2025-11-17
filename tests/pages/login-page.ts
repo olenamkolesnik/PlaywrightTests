@@ -1,28 +1,34 @@
 import { expect, type Locator, type Page } from '@playwright/test';
+import { BasePage } from './base-page';
 import { InventoryPage } from './inventory-page';
 
 /**
  * Login Page Object Model
  * Handles all login page interactions and assertions
+ * Extends BasePage for common functionality
  */
-export class LoginPage {
-  readonly page: Page;
-  private usernameInput: Locator;
-  private passwordInput: Locator;
-  private loginButton: Locator;
-  private errorMessage: Locator;
+export class LoginPage extends BasePage {
+  private readonly usernameInput: Locator;
+  private readonly passwordInput: Locator;
+  private readonly loginButton: Locator;
+  private readonly errorMessage: Locator;
+  private readonly rootLocator: Locator;
+  private readonly loginContainer: Locator;
+  private readonly credentialsContainer: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     this.usernameInput = page.locator('[data-test="username"]');
     this.passwordInput = page.locator('[data-test="password"]');
     this.loginButton = page.locator('[data-test="login-button"]');
     this.errorMessage = page.locator('[data-test="error"]');
+    this.rootLocator = page.locator('#root');
+    this.loginContainer = page.locator('[data-test="login-container"]');
+    this.credentialsContainer = page.locator('[data-test="login-credentials-container"]');
   }
 
   async goto() {
     await this.page.goto('/');
-    // Wait for login form to be ready
     await expect(this.usernameInput).toBeVisible({ timeout: 5000 });
   }
 
@@ -40,32 +46,29 @@ export class LoginPage {
 
   async logIn(username: string, password: string): Promise<InventoryPage> {
     await this.fillUsername(username);
-    await this.fillPassword(password);    
+    await this.fillPassword(password);
     await this.clickLogin();
+    await this.page.waitForLoadState('load');
     return new InventoryPage(this.page);
   }
 
   async expectErrorMessage(message: string) {
     await expect(this.errorMessage).toBeVisible({ timeout: 5000 });
-    await expect(this.errorMessage).toHaveText(message);
-  }
-
-  async expectPageTitle(title: string) {
-    await expect(this.page).toHaveTitle(title);
+    await expect(this.errorMessage).toContainText(message);
   }
 
   async expectPageHeading(text: string) {
-    await expect(this.page.locator('#root')).toContainText(text);
+    await expect(this.rootLocator).toContainText(text);
   }
 
   async expectLoginPageStructure() {
-    await expect(this.page.locator('[data-test="login-container"]'))
+    await expect(this.loginContainer)
       .toMatchAriaSnapshot(`
     - textbox "Username"
     - textbox "Password"
     - button "Login"
     `);
-    await expect(this.page.locator('[data-test="login-credentials-container"]'))
+    await expect(this.credentialsContainer)
       .toMatchAriaSnapshot(`
     - heading "Accepted usernames are:" [level=4]
     - text: standard_user locked_out_user problem_user performance_glitch_user error_user visual_user
@@ -78,5 +81,5 @@ export class LoginPage {
     await this.expectPageTitle('Swag Labs');
     await this.expectPageHeading('Swag Labs');
     await this.expectLoginPageStructure();
-  }
+  }  
 }

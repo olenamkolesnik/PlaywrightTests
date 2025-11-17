@@ -7,3 +7,7 @@ node_modules/
 /playwright/.cache/
 /playwright/.auth/
 .env
+.github/chatmodes/ 🎭 planner.chatmode.md
+.github/chatmodes/🎭 generator.chatmode.md
+.github/chatmodes/🎭 healer.chatmode.md
+.vscode/mcp.json

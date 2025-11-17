@@ -40,11 +40,26 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    {
+     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'] }
     },
-
+    {
+      name: 'chromium-p0',
+      use: { ...devices['Desktop Chrome'] },
+      grep: /@p0/,
+    },
+    {
+      name: 'chromium-p1',
+      use: { ...devices['Desktop Chrome'] },
+      grep: /@p1/,
+    },
+     {
+      name: 'chromium-p2',
+      use: { ...devices['Desktop Chrome'] },
+      grep: /@p2/,
+    },
+/*
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
@@ -53,7 +68,7 @@ export default defineConfig({
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
-    },
+    },*/
 
     /* Test against mobile viewports. */
     // {

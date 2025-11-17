@@ -1,11 +1,11 @@
 import { test, expect } from '../fixtures/login-fixtures';
 import { testCredentials } from '../helpers/test-credentials';
 
-test('Login page loads correctly', async ({ loginPage }) => {
+test('@p0 Login page loads correctly', async ({ loginPage }) => {
   await loginPage.expectLoginPageFullyLoaded();
 });
 
-test('Login with valid credentials', async ({ loginPage }) => {
+test('@p0 Login with valid credentials', async ({ loginPage }) => {
   const inventoryPage = await loginPage.logIn(
     testCredentials.validUser.username!,
     testCredentials.validUser.password!
@@ -13,7 +13,7 @@ test('Login with valid credentials', async ({ loginPage }) => {
   await inventoryPage.expectInventoryPageFullyLoaded();
 });
 
-test('Login with invalid credentials shows error', async ({ loginPage }) => {
+test('@p1 Login with invalid credentials shows error', async ({ loginPage }) => {
   await loginPage.logIn('invalid_user', 'wrong_password');
   await loginPage.expectErrorMessage(
     'Epic sadface: Username and password do not match any user in this service'
@@ -35,7 +35,7 @@ const invalidLoginData = [
 ];
 
 invalidLoginData.forEach(({ username, password, error }) => {
-  test(`Login validation: username "${username}"/password "${password}" "${error}"`, async ({
+  test(`@p2 Login validation: username "${username}"/password "${password}" "${error}"`, async ({
     loginPage,
   }) => {
     if (username) await loginPage.fillUsername(username);
